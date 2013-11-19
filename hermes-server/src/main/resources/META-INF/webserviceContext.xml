@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:cxf="http://cxf.apache.org/core"
@@ -18,9 +19,5 @@
     <jaxws:endpoint
             id="deliveryWS"
             implementor="pl.com.turski.hermes.server.webservice.DeliveryWSImpl"
-            address="/deliveryWS"/>
-
-    <jaxws:client id="deliveryClient"
-                  serviceClass="pl.com.turski.hermes.server.webservice.DeliveryWS"
-                  address="http://localhost:8080/hermes-server/services/deliveryWS"/>
+            address="/deliveryWS" />
 </beans>
