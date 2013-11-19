@@ -1,0 +1,7 @@
+.idea/**
+target/**
+*.iml
+
+hermes-server/.idea/**
+hermes-server/target/**
+hermes-server/*.iml
