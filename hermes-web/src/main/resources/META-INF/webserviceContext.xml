@@ -10,6 +10,6 @@
     </bean>
 
     <jaxws:client id="deliveryWS"
-                  serviceClass="pl.com.turski.hermes.server.webservice.DeliveryWS"
+                  serviceClass="pl.com.turski.hermes.web.webservice.DeliveryWS"
                   address="${deliveryWS}"/>
 </beans>
