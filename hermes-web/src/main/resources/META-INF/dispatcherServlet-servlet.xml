@@ -7,13 +7,14 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
     <context:component-scan base-package="pl.com.turski.hermes.web.controller"/>
+
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
 
     <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
         <property name="favorPathExtension" value="true"/>
-        <property name="useJaf" value="false"/>
         <property name="ignoreAcceptHeader" value="true"/>
+        <property name="useJaf" value="false"/>
         <property name="mediaTypes">
             <map>
                 <entry key="json" value="application/json"/>
@@ -24,6 +25,7 @@
     </bean>
 
     <bean id="contentNegotiationViewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1"/>
         <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
         <property name="defaultViews">
             <list>
@@ -32,16 +34,13 @@
                 </bean>
             </list>
         </property>
-        <property name="viewResolvers">
-            <list>
-                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-                    <property name="prefix" value="/WEB-INF/pages/"/>
-                    <property name="suffix" value=".jsp"/>
-                    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-                </bean>
-            </list>
-        </property>
     </bean>
 
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="order" value="2"/>
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    </bean>
 
 </beans>

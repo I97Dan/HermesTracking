@@ -1,57 +1,48 @@
 package pl.com.turski.hermes.web.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import pl.com.turski.hermes.web.webservice.Address;
+import pl.com.turski.hermes.web.model.CreateDeliveryRequest;
 import pl.com.turski.hermes.web.webservice.DeliveryWS;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * User: Adam
  */
 @Controller
-@RequestMapping( value = "/delivery" )
+@RequestMapping(value = "/delivery")
 public class DeliveryController
 {
+	private static final Logger logger = Logger.getLogger( DeliveryController.class );
+
 	@Autowired
 	DeliveryWS deliveryWS;
 
-	@RequestMapping( value = "/create", method = RequestMethod.GET )
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView createDeliveryPage()
 	{
-		ModelAndView mav = new ModelAndView( "delivery/new-delivery" );
-		mav.addObject( "address", new Address() );
-		return mav;
+		logger.info( "New delivery page" );
+		return new ModelAndView( "delivery/new-delivery" );
 	}
 
-	@RequestMapping( value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
+	@RequestMapping( value = "/create", method = RequestMethod.POST )
 	@ResponseBody
-	public Long createDelivery( @RequestBody String recipient, Address recipientAddress )
+	public Long createDelivery( @RequestBody CreateDeliveryRequest createDeliveryRequest )
 	{
-		return deliveryWS.createDelivery( recipient, recipientAddress );
-	}
+		logger.info( "Delivery creation" );
+		logger.debug( "createDeliveryRequest.recipient: " + createDeliveryRequest.getRecipient() );
+		logger.debug( "createDeliveryRequest.recipientAddress: " + createDeliveryRequest.getRecipientAddress().toString() );
 
-	@RequestMapping( value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
-	@ResponseBody
-	public List<String> allDelivery()
-	{
-		return new ArrayList<>();
-	}
+		Long id = deliveryWS.createDelivery( createDeliveryRequest.getRecipient(), createDeliveryRequest.getRecipientAddress() );
 
-	@RequestMapping( value = "", method = RequestMethod.GET )
-	public ModelAndView allDeliveryPage()
-	{
-		ModelAndView mav = new ModelAndView( "delivery/all-delivery" );
-		mav.addObject( "deliveries", allDelivery() );
-		return mav;
+		logger.info( "Delivery created" );
+		logger.debug( "id: " + id );
+		return id;
 	}
 
 }
