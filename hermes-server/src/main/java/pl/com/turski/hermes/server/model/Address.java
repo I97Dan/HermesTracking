@@ -9,27 +9,27 @@ import javax.persistence.*;
 public class Address
 {
 	@Id
-	@GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "address_gen" )
-	@SequenceGenerator( allocationSize = 1, name = "address_gen", sequenceName = "address_id" )
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_gen")
+	@SequenceGenerator(allocationSize = 1, name = "address_gen", sequenceName = "address_id")
 	private long id;
-	private String city;
 	private String street;
 	private String house;
 	private String flat;
 	private String postcode;
+	private String city;
 	private String country;
 
 	public Address()
 	{
 	}
 
-	public Address( final String city, final String street, final String house, final String flat, final String postcode, final String country )
+	public Address( final String street, final String house, final String flat, final String postcode, final String city, final String country )
 	{
-		this.city = city;
 		this.street = street;
 		this.house = house;
 		this.flat = flat;
 		this.postcode = postcode;
+		this.city = city;
 		this.country = country;
 	}
 
