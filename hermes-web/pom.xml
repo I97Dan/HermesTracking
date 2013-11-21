@@ -77,7 +77,7 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        <!-- Jackson JSON Mapper -->
+        <!-- Jackson mapper -->
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
@@ -95,6 +95,12 @@
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
+        </dependency>
+        <!-- Logging framework -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
     </dependencies>
 </project>
