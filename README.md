@@ -1,4 +1,4 @@
 Hermes
 ======
 
-Hermes - tracking delivery app (system created for the master's thesis).
+Hermes - tracking shipment app (system created for the master's thesis).

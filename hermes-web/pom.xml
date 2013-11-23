@@ -45,7 +45,7 @@
                             <sourceRoot>${project.build.directory}/generated-sources/webservice</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>http://192.168.1.110:7070/hermes-server/services/deliveryWS?wsdl</wsdl>
+                                    <wsdl>http://192.168.1.110:7070/hermes-server/services/shipmentWS?wsdl</wsdl>
                                     <extraargs>
                                         <extraarg>-client</extraarg>
                                         <extraarg>-verbose</extraarg>

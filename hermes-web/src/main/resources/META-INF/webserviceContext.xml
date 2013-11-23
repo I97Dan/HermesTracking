@@ -9,7 +9,7 @@
         <property name="location" value="classpath:webservice.properties"/>
     </bean>
 
-    <jaxws:client id="deliveryWS"
-                  serviceClass="pl.com.turski.hermes.web.webservice.DeliveryWS"
-                  address="${deliveryWS}"/>
+    <jaxws:client id="shipmentWS"
+                  serviceClass="pl.com.turski.hermes.web.webservice.ShipmentWS"
+                  address="${shipmentWS}"/>
 </beans>

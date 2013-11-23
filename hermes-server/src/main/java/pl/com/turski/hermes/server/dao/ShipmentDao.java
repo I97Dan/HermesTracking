@@ -1,10 +1,10 @@
 package pl.com.turski.hermes.server.dao;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
-import pl.com.turski.hermes.server.model.Delivery;
+import pl.com.turski.hermes.server.model.Shipment;
 
 /**
  * User: Adam
  */
-public interface DeliveryDao extends PagingAndSortingRepository<Delivery, Long>
+public interface ShipmentDao extends PagingAndSortingRepository<Shipment, Long>
 {}

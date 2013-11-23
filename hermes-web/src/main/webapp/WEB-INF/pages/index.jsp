@@ -11,8 +11,8 @@
 <div id="container">
     <h1>Strona startowa</h1>
     <p>
-        <a href="${pageContext.request.contextPath}/delivery/create.htm">Nowa przesyłka</a><br/>
-        <a href="${pageContext.request.contextPath}/delivery.htm">Przesyłki</a><br/>
+        <a href="${pageContext.request.contextPath}/shipment/create.htm">Nowa przesyłka</a><br/>
+        <a href="${pageContext.request.contextPath}/shipment.htm">Przesyłki</a><br/>
     </p>
 </div>
 </body>

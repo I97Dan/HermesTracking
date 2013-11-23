@@ -17,7 +17,7 @@
 <div id="container">
     <h1>Przesyłki</h1>
 
-    <a href="${pageContext.request.contextPath}/delivery/create.htm">Nowa przesyłka</a><br/>
+    <a href="${pageContext.request.contextPath}/shipment/create.htm">Nowa przesyłka</a><br/>
 </div>
 </body>
 </html>

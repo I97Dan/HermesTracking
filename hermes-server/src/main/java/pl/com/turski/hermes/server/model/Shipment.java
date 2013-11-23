@@ -7,11 +7,11 @@ import java.util.Date;
  * User: Adam
  */
 @Entity
-public class Delivery
+public class Shipment
 {
 	@Id
-	@GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "delivery_gen" )
-	@SequenceGenerator( allocationSize = 1, name = "delivery_gen", sequenceName = "delivery_id" )
+	@GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "shipment_gen" )
+	@SequenceGenerator( allocationSize = 1, name = "shipment_gen", sequenceName = "shipment_id" )
 	private Long id;
 	private String recipient;
 	@OneToOne( fetch = FetchType.LAZY, cascade = { CascadeType.ALL } )
@@ -19,11 +19,11 @@ public class Delivery
 	private Address recipientAddress;
 	private Date created;
 
-	public Delivery()
+	public Shipment()
 	{
 	}
 
-	public Delivery( final String recipient, final Address recipientAddress, final Date created )
+	public Shipment( final String recipient, final Address recipientAddress, final Date created )
 	{
 		this.recipient = recipient;
 		this.recipientAddress = recipientAddress;
@@ -73,7 +73,7 @@ public class Delivery
 	@Override
 	public String toString()
 	{
-		return "Delivery{" +
+		return "Shipment{" +
 			"id=" + id +
 			", recipient='" + recipient + '\'' +
 			", recipientAddress=" + recipientAddress +

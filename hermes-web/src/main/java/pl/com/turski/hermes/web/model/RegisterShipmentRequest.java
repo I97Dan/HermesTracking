@@ -5,16 +5,16 @@ import pl.com.turski.hermes.web.webservice.Address;
 /**
  * User: Adam
  */
-public class CreateDeliveryRequest
+public class RegisterShipmentRequest
 {
 	private String recipient;
 	private Address recipientAddress;
 
-	public CreateDeliveryRequest()
+	public RegisterShipmentRequest()
 	{
 	}
 
-	public CreateDeliveryRequest( final String recipient, final Address recipientAddress )
+	public RegisterShipmentRequest( final String recipient, final Address recipientAddress )
 	{
 		this.recipient = recipient;
 		this.recipientAddress = recipientAddress;

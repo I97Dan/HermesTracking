@@ -10,7 +10,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript">
         $( document ).ready( function () {
-            $( '#newDeliveryForm' ).submit( function ( event){
+            $( '#newShipmentForm' ).submit( function ( event){
                 var recipient = $('#recipient' ).val();
                 var street = $('#street').val();
                 var house = $('#house').val();
@@ -30,7 +30,7 @@
                             }};
 
                 $.ajax({
-                    url: $('#newDeliveryForm' ).attr("action"),
+                    url: $('#newShipmentForm' ).attr("action"),
                     data: JSON.stringify(json),
                     type: "POST",
                     beforeSend: function(xhr){
@@ -43,7 +43,7 @@
                         responseContent += id;
                         responseContent += "]</span>";
 
-                        $('#newDeliveryResponse' ).html(responseContent);
+                        $('#newShipmentResponse' ).html(responseContent);
                     }
                 });
                 event.preventDefault();
@@ -54,13 +54,13 @@
 </head>
 <body>
 <div id="container">
-    <div id="newDeliveryResponse"></div>
+    <div id="newShipmentResponse"></div>
 
     <h1>Nowa przesyłka</h1>
 
     <p>Wpisz poniżej dane adresata przesyłki</p>
 
-    <form:form id="newDeliveryForm" action="${pageContext.request.contextPath}/delivery/create.json">
+    <form:form id="newShipmentForm" action="${pageContext.request.contextPath}/shipment/create.json">
         <table>
             <tr>
                 <td>Nazwa:</td>

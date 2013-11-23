@@ -10,8 +10,8 @@ import javax.jws.WebService;
  * User: Adam
  */
 @WebService
-public interface DeliveryWS
+public interface ShipmentWS
 {
 	@WebMethod
-	public Long createDelivery(@WebParam(name = "recipient") String recipient, @WebParam(name = "recipientAddress") Address recipientAddress);
+	public Long registerShipment( @WebParam(name = "recipient") String recipient, @WebParam(name = "recipientAddress") Address recipientAddress );
 }
