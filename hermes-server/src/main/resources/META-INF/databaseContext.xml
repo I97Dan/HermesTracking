@@ -37,6 +37,6 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <jpa:repositories base-package="pl.com.turski.hermes.server.dao"/>
+    <jpa:repositories base-package="pl.com.turski.hermes.server.repository"/>
 
 </beans>
