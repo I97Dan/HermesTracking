@@ -17,7 +17,7 @@ import pl.com.turski.hermes.web.webservice.ShipmentWS;
  * User: Adam
  */
 @Controller
-@RequestMapping(value = "/shipment")
+@RequestMapping( value = "/shipment" )
 public class ShipmentController
 {
 	private static final Logger logger = Logger.getLogger( ShipmentController.class );
@@ -25,14 +25,14 @@ public class ShipmentController
 	@Autowired
 	ShipmentWS shipmentWS;
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping( value = "/create", method = RequestMethod.GET )
 	public ModelAndView createShipmentPage()
 	{
 		logger.info( "New shipment page" );
 		return new ModelAndView( "shipment/new-shipment" );
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@RequestMapping( value = "/create", method = RequestMethod.POST )
 	@ResponseBody
 	public Long createShipment( @RequestBody RegisterShipmentRequest registerShipmentRequest )
 	{
@@ -61,16 +61,16 @@ public class ShipmentController
 		logger.info( "Check shipment[" + checkShipmentRequest.getShipmentId() + "]" );
 		logger.debug( "shipmentId: " + checkShipmentRequest.getShipmentId() );
 
-		Shipment shipment = shipmentWS.checkShipment(  checkShipmentRequest.getShipmentId()  );
+		Shipment shipment = shipmentWS.checkShipment( checkShipmentRequest.getShipmentId() );
 
 		if( shipment != null )
 		{
 			logger.info( "Shipment[" + checkShipmentRequest.getShipmentId() + "] found" );
 			logger.debug( "shipment.id: " + shipment.getId() );
 			logger.debug( "shipment.recipient: " + shipment.getRecipient() );
-/*			logger.debug( "shipment.recipientAddress: " + shipment.getRecipientAddress() );
+			logger.debug( "shipment.recipientAddress: " + shipment.getAddress() );
 			logger.debug( "shipment.created: " + shipment.getCreated() );
-			logger.debug( "shipment.shipmentStatusList.size: " + shipment.getShipmentStatusList().size() );*/
+			logger.debug( "shipment.shipmentStatusList.size: " + shipment.getShipmentStatusList().size() );
 		}
 		else
 		{
