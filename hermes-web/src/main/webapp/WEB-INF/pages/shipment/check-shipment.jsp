@@ -90,6 +90,8 @@
     </table>
 </form:form>
 </div>
-
+<div id="footerContainer">
+    <div class="footer">HERMES 1.0</div>
+</div>
 </body>
 </html>
