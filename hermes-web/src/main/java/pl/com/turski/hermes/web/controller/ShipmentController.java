@@ -3,81 +3,98 @@ package pl.com.turski.hermes.web.controller;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import pl.com.turski.hermes.web.model.CheckShipmentRequest;
-import pl.com.turski.hermes.web.model.RegisterShipmentRequest;
+import pl.com.turski.hermes.web.model.CheckShipmentForm;
+import pl.com.turski.hermes.web.model.RegisterShipmentForm;
+import pl.com.turski.hermes.web.validator.RegisterShipmentValidator;
 import pl.com.turski.hermes.web.webservice.Shipment;
 import pl.com.turski.hermes.web.webservice.ShipmentWS;
+
+import java.util.List;
 
 /**
  * User: Adam
  */
 @Controller
-@RequestMapping( value = "/shipment" )
-public class ShipmentController
-{
-	private static final Logger logger = Logger.getLogger( ShipmentController.class );
+public class ShipmentController {
 
-	@Autowired
-	ShipmentWS shipmentWS;
+    private static final Logger LOG = Logger.getLogger(ShipmentController.class);
 
-	@RequestMapping( value = "/create", method = RequestMethod.GET )
-	public ModelAndView createShipmentPage()
-	{
-		logger.info( "New shipment page" );
-		return new ModelAndView( "shipment/new-shipment" );
-	}
+    @Autowired
+    ShipmentWS shipmentWS;
 
-	@RequestMapping( value = "/create", method = RequestMethod.POST )
-	@ResponseBody
-	public Long createShipment( @RequestBody RegisterShipmentRequest registerShipmentRequest )
-	{
-		logger.info( "Shipment creation" );
-		logger.debug( "createShipmentRequest.recipient: " + registerShipmentRequest.getRecipient() );
-		logger.debug( "createShipmentRequest.recipientAddress: " + registerShipmentRequest.getRecipientAddress() );
+    @RequestMapping(value = "/shipment/create", method = RequestMethod.GET)
+    public ModelAndView createShipmentPage() {
+        LOG.debug("Create shipment");
+        return new ModelAndView("shipment/create");
+    }
 
-		Long id = shipmentWS.registerShipment( registerShipmentRequest.getRecipient(), registerShipmentRequest.getRecipientAddress() );
+    @RequestMapping(value = "/shipment/create", method = RequestMethod.POST)
+    @ResponseBody
+    public Long createShipment(@RequestBody RegisterShipmentForm registerShipmentForm, BindingResult bindingResult) {
+        LOG.info("Shipment creation");
+        LOG.debug("createShipmentRequest.recipient: " + registerShipmentForm.getRecipient());
+        LOG.debug("createShipmentRequest.recipientAddress: " + registerShipmentForm.getRecipientAddress());
 
-		logger.info( "Shipment[" + id + "] created" );
-		logger.debug( "id: " + id );
-		return id;
-	}
+        RegisterShipmentValidator registerShipmentValidator = new RegisterShipmentValidator();
+        registerShipmentValidator.validate(registerShipmentForm, bindingResult);
 
-	@RequestMapping( value = "/check", method = RequestMethod.GET )
-	public ModelAndView checkShipmentPage()
-	{
-		logger.info( "Check shipment page" );
-		return new ModelAndView( "shipment/check-shipment" );
-	}
+//		if(bindingResult.hasErrors()){
+//			return new Response<>( bindingResult );
+//		}
 
-	@RequestMapping( value = "/check", method = RequestMethod.POST )
-	@ResponseBody
-	public Shipment checkShipment( @RequestBody CheckShipmentRequest checkShipmentRequest )
-	{
-		logger.info( "Check shipment[" + checkShipmentRequest.getShipmentId() + "]" );
-		logger.debug( "shipmentId: " + checkShipmentRequest.getShipmentId() );
+        Long id = shipmentWS.registerShipment(registerShipmentForm.getRecipient(), registerShipmentForm.getRecipientAddress());
 
-		Shipment shipment = shipmentWS.checkShipment( checkShipmentRequest.getShipmentId() );
+        LOG.info("Shipment[" + id + "] created");
+        LOG.debug("id: " + id);
+//		return new Response<>( id );
+        return id;
+    }
 
-		if( shipment != null )
-		{
-			logger.info( "Shipment[" + checkShipmentRequest.getShipmentId() + "] found" );
-			logger.debug( "shipment.id: " + shipment.getId() );
-			logger.debug( "shipment.recipient: " + shipment.getRecipient() );
-			logger.debug( "shipment.recipientAddress: " + shipment.getAddress() );
-			logger.debug( "shipment.created: " + shipment.getCreated() );
-			logger.debug( "shipment.shipmentStatusList.size: " + shipment.getShipmentStatusList().size() );
-		}
-		else
-		{
-			logger.info( "Shipment[" + checkShipmentRequest.getShipmentId() + "] not found" );
-		}
+    @RequestMapping(value = "/shipment/check", method = RequestMethod.GET)
+    public ModelAndView checkShipmentPage() {
+        LOG.info("Check shipment page");
+        return new ModelAndView("shipment/check");
+    }
 
-		return shipment;
-	}
+    @RequestMapping(value = "/shipment/check", method = RequestMethod.POST)
+    @ResponseBody
+    public Shipment checkShipment(@RequestBody CheckShipmentForm checkShipmentForm) {
+        try {
+            LOG.info("Check shipment[" + checkShipmentForm.getShipmentId() + "]");
 
+            Long shipmentId = Long.parseLong(checkShipmentForm.getShipmentId());
+
+            Shipment shipment = shipmentWS.checkShipment(shipmentId);
+
+            if (shipment != null) {
+                LOG.info("Shipment[" + checkShipmentForm.getShipmentId() + "] found");
+                LOG.debug("shipment.id: " + shipment.getId());
+                LOG.debug("shipment.recipient: " + shipment.getRecipient());
+                LOG.debug("shipment.recipientAddress: " + shipment.getAddress());
+                LOG.debug("shipment.created: " + shipment.getCreated());
+                LOG.debug("shipment.shipmentMovementList.size: " + shipment.getShipmentMovementList().size());
+            } else {
+                LOG.info("Shipment[" + checkShipmentForm.getShipmentId() + "] not found");
+            }
+
+            return shipment;
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/shipment/list", method = RequestMethod.GET)
+    public ModelAndView shipmentListPage() {
+        LOG.info("Check shipment page");
+        List<Shipment> shipmentList = shipmentWS.shipmentList();
+        ModelAndView mav = new ModelAndView("shipment/list");
+        mav.addObject("shipmentList", shipmentList);
+        return mav;
+    }
 }

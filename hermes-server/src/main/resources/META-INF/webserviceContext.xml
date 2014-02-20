@@ -19,5 +19,10 @@
     <jaxws:endpoint
             id="shipmentWS"
             implementor="pl.com.turski.hermes.server.webservice.ShipmentWSImpl"
-            address="/shipmentWS" />
+            address="/shipmentWS"/>
+
+    <jaxws:endpoint
+            id="userAuthenticationWS"
+            implementor="pl.com.turski.hermes.server.webservice.UserAuthenticationWSImpl"
+            address="/userAuthenticationWS"/>
 </beans>

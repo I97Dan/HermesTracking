@@ -6,5 +6,5 @@ import pl.com.turski.hermes.server.model.Address;
 /**
  * User: Adam
  */
-public interface AddressRepository extends PagingAndSortingRepository<Address, Long>
-{}
+public interface AddressRepository extends PagingAndSortingRepository<Address, Long> {
+}

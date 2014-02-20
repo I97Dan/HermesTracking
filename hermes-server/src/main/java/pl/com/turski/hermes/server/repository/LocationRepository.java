@@ -6,5 +6,5 @@ import pl.com.turski.hermes.server.model.Location;
 /**
  * User: Adam
  */
-public interface LocationRepository extends PagingAndSortingRepository<Location, Long>
-{}
+public interface LocationRepository extends PagingAndSortingRepository<Location, Long> {
+}

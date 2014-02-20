@@ -6,5 +6,5 @@ import pl.com.turski.hermes.server.model.Shipment;
 /**
  * User: Adam
  */
-public interface ShipmentRepository extends PagingAndSortingRepository<Shipment, Long>
-{}
+public interface ShipmentRepository extends PagingAndSortingRepository<Shipment, Long> {
+}

@@ -12,4 +12,8 @@
     <jaxws:client id="shipmentWS"
                   serviceClass="pl.com.turski.hermes.web.webservice.ShipmentWS"
                   address="${shipmentWS}"/>
+
+    <jaxws:client id="userAuthenticationWS"
+                  serviceClass="pl.com.turski.hermes.web.webservice.UserAuthenticationWS"
+                  address="${userAuthenticationWS}"/>
 </beans>
